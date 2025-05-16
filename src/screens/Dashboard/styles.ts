@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Feather } from '@expo/vector-icons'
 import {
   RFPercentage,
   RFValue,
@@ -58,3 +59,7 @@ export const UserName = styled.Text`
   font-family: ${ ({theme}) => theme.fonts.bold };
 `
 
+export const Icon = styled(Feather)`
+  color: ${({theme}) => theme.colors.secondary};
+  font-size: ${ RFValue(24) }px;
+`

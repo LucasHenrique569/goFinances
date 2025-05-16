@@ -8,9 +8,9 @@ import {
     UserGreeting,
     UserName,
     UserWrapper,
+    Icon,
 } from "./styles";
 
-import { Feather } from '@expo/vector-icons'
 
 export function Dashboard(){
     return(
@@ -25,7 +25,7 @@ export function Dashboard(){
                         </User>
                     </UserInfo>
 
-                    <Feather name="power"/>
+                    <Icon name="power"/>
                 </UserWrapper>
             </Header>
         </Container>
