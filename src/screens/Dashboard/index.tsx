@@ -9,7 +9,9 @@ import {
     UserName,
     UserWrapper,
     Icon,
+    HighlightCards,
 } from "./styles";
+import { HighlightCard } from "../../components/HighlightCard";
 
 
 export function Dashboard(){
@@ -28,6 +30,14 @@ export function Dashboard(){
                     <Icon name="power"/>
                 </UserWrapper>
             </Header>
+
+            <HighlightCards
+            >
+                <HighlightCard />
+                <HighlightCard />
+                <HighlightCard />
+            </HighlightCards>
+
         </Container>
     );
 }

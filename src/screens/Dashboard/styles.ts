@@ -7,7 +7,7 @@ import {
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.background};
 `
 
 export const Title = styled.Text`
@@ -63,3 +63,10 @@ export const Icon = styled(Feather)`
   color: ${({theme}) => theme.colors.secondary};
   font-size: ${ RFValue(24) }px;
 `
+
+export const HighlightCards = styled.ScrollView.attrs
+({
+    horizontal: true,
+    showsHorizontalScrollIndicator: false,
+    contentContainerStyle: {paddingHorizontal: 24},
+})``
