@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+
 import { 
     Container, 
     Header,
@@ -10,9 +10,11 @@ import {
     UserWrapper,
     Icon,
     HighlightCards,
+    Transactions,
+    Text,
 } from "./styles";
 import { HighlightCard } from "../../components/HighlightCard";
-
+import { Transaction } from "../../components/transactions";
 
 export function Dashboard(){
     return(
@@ -20,7 +22,7 @@ export function Dashboard(){
             <Header>
                 <UserWrapper>
                     <UserInfo>
-                        <Photo source={ { uri: 'https://upload.wikimedia.org/wikipedia/pt/thumb/f/f5/Boston_Celtics.png/250px-Boston_Celtics.png' } }/>
+                        <Photo source={ { uri: 'https://avatars.githubusercontent.com/u/188273989?s=400&u=ac39839d3f84862e5623729de5989c801d7b00e2&v=4' } }/>
                         <User>
                             <UserGreeting>Olá</UserGreeting>
                             <UserName>Aluno</UserName>
@@ -31,13 +33,34 @@ export function Dashboard(){
                 </UserWrapper>
             </Header>
 
-            <HighlightCards
-            >
-                <HighlightCard />
-                <HighlightCard />
-                <HighlightCard />
+            <HighlightCards>
+                <HighlightCard 
+                    type='up'
+                    title='Entradas'
+                    amount='R$ 17.000,00'
+                    lastTransaction='Última entrada em 16 de Junho'
+                />
+
+                <HighlightCard 
+                    type='down'
+                    title='Saídas'
+                    amount='R$ 12.000,00'
+                    lastTransaction='Última saída em 10 de Junho'
+                />
+
+                <HighlightCard 
+                    type='total'
+                    title='Total'
+                    amount='R$ 7.000,00'
+                    lastTransaction='De 1 a 16 de Junho'
+                />
             </HighlightCards>
 
+            <Transactions>
+                <Text>Listagem</Text>
+                <Transaction />
+            </Transactions>
+            
         </Container>
     );
 }

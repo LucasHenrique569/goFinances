@@ -20,7 +20,7 @@ export const Header = styled.View`
   width: 100%;
   height: ${RFPercentage(42)};
   background-color: ${ ({theme}) => theme.colors.primary};
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `
 
@@ -30,6 +30,7 @@ export const UserWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: ${RFValue(60)}px;
 `
 
 export const UserInfo = styled.View`
@@ -64,9 +65,29 @@ export const Icon = styled(Feather)`
   font-size: ${ RFValue(24) }px;
 `
 
+
 export const HighlightCards = styled.ScrollView.attrs
 ({
     horizontal: true,
     showsHorizontalScrollIndicator: false,
     contentContainerStyle: {paddingHorizontal: 24},
-})``
+})`
+  width: 100%;
+  position: absolute;
+  margin-top: ${RFPercentage(21)}px;
+  z-index: 9;
+`
+
+export const Transactions = styled.View`
+  flex: 1;
+  padding-top: 50px;
+  padding-left: 30px;
+  z-index: 1;
+  background-color: ${({ theme }) => theme.colors.background};
+`
+
+export const Text = styled.Text`
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 15px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+`
