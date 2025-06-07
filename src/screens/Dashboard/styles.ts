@@ -80,14 +80,21 @@ export const HighlightCards = styled.ScrollView.attrs
 
 export const Transactions = styled.View`
   flex: 1;
-  padding-top: 50px;
-  padding-left: 30px;
-  z-index: 1;
-  background-color: ${({ theme }) => theme.colors.background};
+  padding-top: ${RFPercentage(5)}px;
+  background-color: ${({theme}) => theme.colors.background};
+  
 `
 
 export const Text = styled.Text`
-  color: ${({ theme }) => theme.colors.text};
-  font-size: 15px;
-  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${RFValue(18)}px;
+  font-weight: bold;
+  text-align: left;
+  padding: 0 24px;
+  width: 100%;
+  margin-top: ${RFValue(18)}px;
+  margin-bottom: ${ RFValue(10)}px;
+`
+
+export const TransactionList = styled.FlatList`
+
 `

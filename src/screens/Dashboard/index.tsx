@@ -12,11 +12,46 @@ import {
     HighlightCards,
     Transactions,
     Text,
+    TransactionList,
 } from "./styles";
 import { HighlightCard } from "../../components/HighlightCard";
-import { Transaction } from "../../components/transactions";
+import { Transaction } from "../../components/Transaction";
 
 export function Dashboard(){
+    const data = [{
+        type: 'positive',
+        transactionTitle:"Desenvolvimento de Site",
+        amount:"R$ 12.0000",
+        icon: "dollar-sign",
+        title: "Compra",
+        date: "25/12/2025"
+    },
+    {
+        type: 'negative',
+        transactionTitle:"Desenvolvimento de App",
+        amount:"R$ 20.0000",
+        icon: "dollar-sign",
+        title: "Venda",
+        date: "25/12/2025"
+    },
+    {
+        type: 'positive',
+        transactionTitle:"Desenvolvimento full-stack",
+        amount:"R$ 20.0000",
+        icon: "dollar-sign",
+        title: "Venda",
+        date: "25/12/2025"
+    },
+    {
+        type: 'positive',
+        transactionTitle:"Desenvolvimento full-stack",
+        amount:"R$ 20.0000",
+        icon: "dollar-sign",
+        title: "Venda",
+        date: "25/12/2025"
+    },
+    ]
+
     return(
         <Container>
             <Header>
@@ -58,7 +93,12 @@ export function Dashboard(){
 
             <Transactions>
                 <Text>Listagem</Text>
-                <Transaction />
+
+                <TransactionList 
+                    data={data}
+                    renderItem={({item}) => <Transaction data={item} /> }
+                />
+
             </Transactions>
             
         </Container>
