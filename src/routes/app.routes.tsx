@@ -9,16 +9,16 @@ const { Navigator, Screen } = createBottomTabNavigator();
 export function AppRoutes() {
     return (
         <Navigator id={undefined}>
+            <Screen 
+                name="Listagem"
+                component={Dashboard}
+                
+            />
+
             <Screen
                 name="Cadastrar"
                 component={Register}
             />
-            
-            <Screen 
-                name="Listagem"
-                component={Dashboard}
-            />
-
         </Navigator>
     )
 }
