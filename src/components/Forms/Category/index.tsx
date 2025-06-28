@@ -5,7 +5,10 @@ export function CategoryButton() {
     return(
         <Button>
             <CategoryText>Categoria</CategoryText>
-            <Icon name=""/>
+            <Icon 
+                name="chevron-down"
+            
+            />
         </Button>
     );
 }

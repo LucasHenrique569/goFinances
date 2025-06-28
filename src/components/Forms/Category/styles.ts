@@ -9,6 +9,10 @@ export const Button = styled.View`
     border-radius: ${({ theme }) => theme.borderRadius.medium}px;
     padding: 16px 18px;
     margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `
 
 export const CategoryText = styled.Text`
@@ -19,5 +23,6 @@ export const CategoryText = styled.Text`
 `
 
 export const Icon = styled(Feather)`
-
+    font-size: ${ ({theme}) => theme.fontSize.medium}px;
+    font-family: ${ ({theme}) => theme.fonts.regular};
 `

@@ -3,6 +3,7 @@ import { Container, Header, Title, Form, Transactions } from "./styles";
 import { Input } from "../../components/Forms/Input";
 import { TransactionButton } from "../../components/Forms/TransactionButton";
 import { CategoryButton } from "../../components/Forms/Category";
+import { SendNewTransactionButton } from "../../components/Forms/SendButton";
 
 export function Register() {
     return (
@@ -33,6 +34,8 @@ export function Register() {
                 </Transactions>
 
                 <CategoryButton />
+
+                <SendNewTransactionButton />
             </Form>
         </Container>
     )
