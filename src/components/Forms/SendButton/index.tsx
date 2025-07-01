@@ -1,9 +1,13 @@
 
 import { Button, ButtonTitle } from "./styles";
 
-export function SendNewTransactionButton(){
+interface Props {
+    onPress: () => void;
+}
+
+export function SendNewTransactionButton({ onPress }: Props){
     return (
-        <Button>
+        <Button onPress={onPress}>
             <ButtonTitle>Enviar</ButtonTitle>
         </Button>
     );

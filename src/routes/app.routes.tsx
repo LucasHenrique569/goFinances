@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Dashboard } from "../screens/Dashboard";
 import { Register } from "../screens/Register";
+import { Summary } from "../screens/Summary";
 
 import { useTheme } from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -42,6 +43,20 @@ export function AppRoutes() {
                     tabBarIcon: (({ size, color }) => (
                         <MaterialIcons
                             name="task-alt"
+                            size={size}
+                            color={color}
+                        />
+                    ))
+                }}
+            />
+
+            <Screen
+                name="Resumo"
+                component={Summary}
+                options={{
+                    tabBarIcon: (({ size, color }) => (
+                        <MaterialIcons
+                            name="pie-chart-outline"
                             size={size}
                             color={color}
                         />

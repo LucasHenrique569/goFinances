@@ -15,49 +15,151 @@ import {
     TransactionList,
 } from "./styles";
 import { HighlightCard } from "../../components/HighlightCard";
-import { Transaction } from "../../components/Transaction";
+import { Transaction, TransactionProps } from "../../components/Transaction";
+import { useEffect, useState } from "react";
+
+import { ActivityIndicator } from 'react-native';
+
+interface ApiTransaction {
+    id: string;
+    tipo_da_transacao: 'Entrada' | 'Saída';
+    titulo: string;
+    valor: number;
+    categoria: string;
+    data_da_transacao: string;
+}
 
 export function Dashboard(){
-    const data = [{
-        type: 'positive',
-        transactionTitle:"Desenvolvimento de Site",
-        amount:"R$ 12.0000",
-        icon: "dollar-sign",
-        title: "Compra",
-        date: "25/12/2025"
-    },
-    {
-        type: 'negative',
-        transactionTitle:"Desenvolvimento de App",
-        amount:"R$ 20.0000",
-        icon: "dollar-sign",
-        title: "Venda",
-        date: "25/12/2025"
-    },
-    {
-        type: 'positive',
-        transactionTitle:"Desenvolvimento full-stack",
-        amount:"R$ 20.0000",
-        icon: "dollar-sign",
-        title: "Venda",
-        date: "25/12/2025"
-    },
-    {
-        type: 'positive',
-        transactionTitle:"Desenvolvimento full-stack",
-        amount:"R$ 20.0000",
-        icon: "dollar-sign",
-        title: "Venda",
-        date: "25/12/2025"
-    },
-    ]
+    const [transactions, setTransactions] = useState<ApiTransaction[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    const [totalEntryTransactions, setTotalEntryTransactions] = useState(0);
+    const [totalExitTransactions, setTotalExitTransactions] = useState(0);
+
+    const [lastEntryDateTransaction, setLastEntryDateTransaction] = useState('');
+    const [lastExitDateTransaction, setLastExitDateTransaction] = useState('');
+
+    // Buscar lista de transações cadastradas
+    useEffect(() => {
+        const loadTransactions = async () => {
+            try {
+                const response = await fetch('');
+                const data = await response.json();
+                setTransactions(data);
+            } catch (err) {
+                console.error('Erro ao carregar transações: ', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadTransactions();
+    }, []);
+
+    // Buscar total de transações de entrada
+    useEffect(() => {
+        const getTotalEntryTransactions = async () => {
+            try {
+                const response = await fetch('')
+                const data = await response.json();
+
+                if (data.valor_total_de_entradas !== null){
+                    setTotalEntryTransactions(data.valor_total_de_entradas)
+                }
+            } catch (err) {
+                console.error('Erro ao buscar total de transações de entrada: ', err)
+            }
+        }
+
+        getTotalEntryTransactions()
+    }, []);
+
+    // Buscar total de transações de saída
+    useEffect(() => {
+        const getTotalExitTransactions = async () => {
+            try {
+                const response = await fetch('')
+                const data = await response.json()
+
+                if(data.valor_total_de_saidas !== null){
+                    setTotalExitTransactions(data.valor_total_de_saidas)
+                }
+            } catch (err) {
+                console.error('Erro ao buscar total de transações de saída: ', err)
+            }
+        }
+
+        getTotalExitTransactions()
+    }, [])
+
+    // Busca a data da última transação de entrada no mês e ano atuais
+    useEffect(() => {
+        const getLastEntryDateTransaction = async () => {
+            try {
+                const response = await fetch('')
+                const data = await response.json()
+
+                if(data.data_mais_recente !== null){
+                    setLastEntryDateTransaction(formatDate(data.data_mais_recente))
+                }
+            } catch (err) {
+                console.error('Erro ao buscar data da última transação de entrada: ', err)
+            }
+        }
+
+        getLastEntryDateTransaction()
+    }, [])
+
+    // Busca a data da última transação de saída no mês e ano atuais
+    useEffect(() => {
+        const getLastExitDateTransaction = async () => {
+            try {
+                const response = await fetch('')
+                const data = await response.json()
+
+                if(data.data_mais_recente !== null){
+                    setLastExitDateTransaction(formatDate(data.data_mais_recente))
+                }
+            } catch (err) {
+                console.error('Erro ao buscar data da última transação de saída: ', err)
+            }
+        }
+
+        getLastExitDateTransaction()
+    }, [])
+
+
+    if(loading){
+        return <ActivityIndicator size='large' color='#0000FF' />;
+    }
+
+    function formatDate(utcDate) {
+        return new Intl.DateTimeFormat('pt-BR').format(new Date(utcDate));
+    }
+
+    const createTransaction = ({ item }) => {
+
+        const formatedData: TransactionProps = {
+            type: item.tipo_da_transacao === 'Entrada' ? 'positive' : 'negative',
+            transactionTitle: item.titulo,
+            amount: `R$ ${item.valor}`,
+            icon: 'dollar-sign',
+            title: item.categoria,
+            date: `${formatDate(item.data_da_transacao)}`,
+        }
+
+        return (
+            <Transaction data={formatedData} /> 
+        );
+    };
+
 
     return(
         <Container>
             <Header>
                 <UserWrapper>
                     <UserInfo>
-                        <Photo source={ { uri: 'https://avatars.githubusercontent.com/u/188273989?s=400&u=ac39839d3f84862e5623729de5989c801d7b00e2&v=4' } }/>
+                        <Photo source={ require('../../assets/images/foto_de_perfil_comprimida.jpg') }/>
                         <User>
                             <UserGreeting>Olá</UserGreeting>
                             <UserName>Aluno</UserName>
@@ -72,22 +174,22 @@ export function Dashboard(){
                 <HighlightCard 
                     type='up'
                     title='Entradas'
-                    amount='R$ 17.000,00'
-                    lastTransaction='Última entrada em 16 de Junho'
+                    amount={`R$ ${totalEntryTransactions}`}
+                    lastTransaction={`Última entrada em ${lastEntryDateTransaction}`}
                 />
 
                 <HighlightCard 
                     type='down'
                     title='Saídas'
-                    amount='R$ 12.000,00'
-                    lastTransaction='Última saída em 10 de Junho'
+                    amount={`R$ ${totalExitTransactions}`}
+                    lastTransaction={`Última saída em ${lastExitDateTransaction}`}
                 />
 
                 <HighlightCard 
                     type='total'
                     title='Total'
-                    amount='R$ 7.000,00'
-                    lastTransaction='De 1 a 16 de Junho'
+                    amount={`R$ ${totalEntryTransactions - totalExitTransactions}`}
+                    lastTransaction={`Última entrada em ${lastEntryDateTransaction}`}
                 />
             </HighlightCards>
 
@@ -95,8 +197,8 @@ export function Dashboard(){
                 <Text>Listagem</Text>
 
                 <TransactionList 
-                    data={data}
-                    renderItem={({item}) => <Transaction data={item} /> }
+                    data={transactions}
+                    renderItem={createTransaction}
                 />
 
             </Transactions>

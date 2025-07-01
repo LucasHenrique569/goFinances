@@ -16,6 +16,7 @@ export const Button = styled.TouchableOpacity`
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    margin-bottom: 10px;
 `
 
 export const Icon = styled(Feather)<TypeProps>`

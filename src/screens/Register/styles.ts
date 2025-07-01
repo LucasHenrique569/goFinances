@@ -28,7 +28,6 @@ export const Form = styled.View`
     flex: 1;
     width: 100%;
     padding: 24px;
-    border: 1px solid #000;
 `
 
 export const Transactions = styled.View`
