@@ -6,6 +6,11 @@ import { CategoryButton } from "../../components/Forms/Category";
 import { SendNewTransactionButton } from "../../components/Forms/SendButton";
 import { Alert } from "react-native";
 
+import Constants from 'expo-constants';
+
+const BASE_URL = Constants.expoConfig?.extra?.API_URL;
+
+
 export function Register() {
     const [transactionType, setTransactionType] = useState('')
     const [transactionTitle, setTransactionTitle] = useState('')
@@ -18,7 +23,7 @@ export function Register() {
         // Verifica se tem algum campo do formulário vazio
         if(transactionType !== '' && transactionTitle !== '' && transactionValue !== '' && transactionCategory !== ''){
             try {
-                const response = await fetch('', {
+                const response = await fetch(`${BASE_URL}/api/v1/transacoes`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -20,6 +20,10 @@ import { useEffect, useState } from "react";
 
 import { ActivityIndicator } from 'react-native';
 
+import Constants from 'expo-constants';
+
+const BASE_URL = Constants.expoConfig?.extra?.API_URL;
+
 interface ApiTransaction {
     id: string;
     tipo_da_transacao: 'Entrada' | 'Saída';
@@ -43,7 +47,7 @@ export function Dashboard(){
     useEffect(() => {
         const loadTransactions = async () => {
             try {
-                const response = await fetch('');
+                const response = await fetch(`${BASE_URL}/api/v1/transacoes`);
                 const data = await response.json();
                 setTransactions(data);
             } catch (err) {
@@ -60,7 +64,7 @@ export function Dashboard(){
     useEffect(() => {
         const getTotalEntryTransactions = async () => {
             try {
-                const response = await fetch('')
+                const response = await fetch(`${BASE_URL}/api/v1/transacoes/entradas`)
                 const data = await response.json();
 
                 if (data.valor_total_de_entradas !== null){
@@ -78,7 +82,7 @@ export function Dashboard(){
     useEffect(() => {
         const getTotalExitTransactions = async () => {
             try {
-                const response = await fetch('')
+                const response = await fetch(`${BASE_URL}/api/v1/transacoes/saidas`)
                 const data = await response.json()
 
                 if(data.valor_total_de_saidas !== null){
@@ -96,7 +100,7 @@ export function Dashboard(){
     useEffect(() => {
         const getLastEntryDateTransaction = async () => {
             try {
-                const response = await fetch('')
+                const response = await fetch(`${BASE_URL}/api/v1/transacoes/entradas/data`)
                 const data = await response.json()
 
                 if(data.data_mais_recente !== null){
@@ -114,7 +118,7 @@ export function Dashboard(){
     useEffect(() => {
         const getLastExitDateTransaction = async () => {
             try {
-                const response = await fetch('')
+                const response = await fetch(`${BASE_URL}/api/v1/transacoes/saidas/data`)
                 const data = await response.json()
 
                 if(data.data_mais_recente !== null){

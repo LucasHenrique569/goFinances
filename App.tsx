@@ -2,7 +2,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { Dashboard } from './src/screens/Dashboard';
 import theme from './src/global/styles/theme';
 
 import AppLoading, { AppLoadingProps } from 'expo-app-loading';
