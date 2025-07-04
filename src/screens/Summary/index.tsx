@@ -27,18 +27,19 @@ const dates = [
     {'mes': 'Dezembro', 'digito': 12}
 ]
 
+
 export function Summary(){
     const [year, setYear] = useState<number>(2025);
-    const [month, setMonth] = useState<number>(6);
+    const [month, setMonth] = useState<number>(7);
     const [rawData, setRawData] = useState([]);
     const [graphData, setGraphData] = useState([]);
     const [legendData, setLegendData] = useState([]);
     const [colors, setColors] = useState([]);
 
     // Função que gera dinamicamente cores para o gráfico, com base na quantidade de categorias retornada pela API
-    function gerarCoresHSL(qtd) {
-        return Array.from({ length: qtd }, (_, i) => {
-            const hue = Math.floor((360 / qtd) * i);
+    function generateHSLColors(quantity) {
+        return Array.from({ length: quantity }, (_, i) => {
+            const hue = Math.floor((360 / quantity) * i);
             return `hsl(${hue}, 70%, 50%)`;
         });
     }
@@ -63,9 +64,10 @@ export function Summary(){
         }
     }
 
-    function arredondar(valor: number, casasDecimais: number): number {
-        const fator = Math.pow(10, casasDecimais);
-        return Math.round(valor * fator) / fator;
+    // Função que arredonda um valor informado como argumento para uma certa quantidade de casas decimais informadas por parâmetro também
+    function roundPercentage(valueInformed: number, decimalPlaces: number): number {
+        const factor = Math.pow(10, decimalPlaces);
+        return Math.round(valueInformed * factor) / factor;
     }
 
     
@@ -93,11 +95,11 @@ export function Summary(){
 
         // Calcula a porcentagem e o valor de cada categoria
         const graphData_ = rawData.map(item => ({
-            x: `${arredondar((item.total / total_) * 100, 2)}%`,
+            x: `${roundPercentage((item.total / total_) * 100, 2)}%`,
             y: item.total,
         }));
 
-        const colors_ = gerarCoresHSL(rawData.length);
+        const colors_ = generateHSLColors(rawData.length);
         
         // Atualiza os estados das cores e dos dados que irão compor o gráfico
         setColors(colors_)

@@ -137,10 +137,12 @@ export function Dashboard(){
         return <ActivityIndicator size='large' color='#0000FF' />;
     }
 
+    // Função que formata uma data de "UTC" para "dd/mm/aaaa"
     function formatDate(utcDate) {
         return new Intl.DateTimeFormat('pt-BR').format(new Date(utcDate));
     }
 
+    // Função que cria um "card" para cada transação cadastrada no sistema
     const createTransaction = ({ item }) => {
 
         const formatedData: TransactionProps = {

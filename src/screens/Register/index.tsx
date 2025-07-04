@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Header, Title, Form, Transactions } from "./styles";
 import { Input } from "../../components/Forms/Input";
 import { TransactionButton } from "../../components/Forms/TransactionButton";
@@ -38,6 +38,11 @@ export function Register() {
 
                 if(response.ok){
                     Alert.alert('Sucesso', 'Nova transação cadastrada com sucesso')
+
+                    setTransactionType('')
+                    setTransactionTitle('')
+                    setTransactionValue('')
+                    setTransactionCategory('')
                 } else {
                     Alert.alert('Erro', 'Falha ao cadastrar nova transação')
                 }
@@ -58,6 +63,7 @@ export function Register() {
         setTransactionValue(justNumbers)
     }
 
+
     return (
         <Container>
             <Header>
@@ -66,7 +72,7 @@ export function Register() {
 
             <Form>
                 <Input 
-                    placeholder="Nome"
+                    placeholder="Nome - máx (100) caracteres"
                     maxLength={100}
                     value={transactionTitle}
                     onChangeText={(newTransactionTitle) => setTransactionTitle(newTransactionTitle)}
@@ -84,19 +90,19 @@ export function Register() {
                         type='up'
                         textType="Entrada"
                         onPress={() => {setTransactionType('Entrada')}}
+                        isActiveOrNot={transactionType}
                     />
 
                     <TransactionButton
                         type='down'
                         textType="Saída"
                         onPress={() => {setTransactionType('Saída')}}
+                        isActiveOrNot={transactionType}
                     />
                 </Transactions>
 
-                {/* <CategoryButton /> */}
-
                 <Input
-                    placeholder="Categoria"
+                    placeholder="Categoria - máx (50) caracteres"
                     maxLength={50}
                     value={transactionCategory}
                     onChangeText={(newCategory) => {setTransactionCategory(newCategory)}}

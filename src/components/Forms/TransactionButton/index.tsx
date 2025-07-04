@@ -5,6 +5,7 @@ interface Props {
     type: 'up' | 'down';
     textType: string;
     onPress: () => void;
+    isActiveOrNot: string
 }
 
 const icon = {
@@ -12,9 +13,13 @@ const icon = {
     down: 'arrow-down-circle',
 }
 
-export function TransactionButton({ type, textType, onPress}: Props) {
+export function TransactionButton({ type, textType, onPress, isActiveOrNot}: Props) {
     return(
-        <Button onPress={onPress}>
+        <Button 
+            onPress={onPress} 
+            isActiveOrNot_={isActiveOrNot}
+            textType_={textType}
+        >
             <Icon 
                 name={ icon[type] }
                 type={ type }

@@ -7,7 +7,12 @@ interface TypeProps {
     type: 'up' | 'down' | 'total'
 }
 
-export const Button = styled.TouchableOpacity`
+interface ButtonProps {
+    isActiveOrNot_ : string
+    textType_ : string
+}
+
+export const Button = styled.TouchableOpacity<ButtonProps>`
     width: 49%;
     background-color: ${({ theme }) => theme.colors.shape};
     border-radius: ${({ theme }) => theme.borderRadius.medium}px;
@@ -17,6 +22,13 @@ export const Button = styled.TouchableOpacity`
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 10px;
+
+    ${({ isActiveOrNot_, textType_ }) =>
+        isActiveOrNot_ === textType_ &&
+        css`
+            border: 2px solid #000;    
+        `
+    }
 `
 
 export const Icon = styled(Feather)<TypeProps>`
