@@ -14,6 +14,8 @@ A ideia deste aplicativo é permitir que o usuário gerencie transações financ
 - Datas das últimas transações de entrada e saída
 - Resumo com o valor total arrecadado por categoria em um determinado mês e ano das transações de entrada
 
+- Observação: na tela de cadastro, após o usuário cadastrar uma nova transação, para que a mesma apareça na tela de Listagem e na tela de Resumo é necessário recarregar o expo, derrubando o antigo e executando "npx expo start" novamente.
+
 ## Tecnologias 
 
 - React Native
@@ -25,7 +27,7 @@ A ideia deste aplicativo é permitir que o usuário gerencie transações financ
 ## Instalação:
 
 1. Clone o repositório:
-- git clone https://github.com/LucasHenrique/goFinances.git
+- git clone https://github.com/LucasHenrique569/goFinances.git
 
 2. Acesse a pasta do projeto e mude para a branch "homeVersion", que é a versão definitiva do projeto:
 - cd goFinances
